@@ -1,0 +1,41 @@
+<a routerLink="/book/new" routerLinkActive="active" ariaCurrentWhenActive="page">
+<button>
+    Agregar nuevo
+</button>
+</a>
+<div>
+    <label for="search">
+        Search by Id
+    </label>
+    <input type="text" [(ngModel)]="searchedBook" (keyup)="searchBook()">
+    <button (click)="searchBook()">
+        Search
+    </button>
+</div>
+<table border="1">
+    <thead>
+        <tr>
+            <td>Title</td>
+            <td>Page Count</td>
+            <td>Publish Date</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="books?.length == 0">
+            <td colspan="3">No books found</td>
+        </tr>
+        <tr *ngFor="let book of books;">
+            <td>
+                <a routerLink="/book/{{book.id}}" routerLinkActive="active" ariaCurrentWhenActive="page">
+                    {{book.title}}
+                </a>
+            </td>
+            <td>
+                {{book.pageCount}}
+            </td>
+            <td>
+                {{book.publishDate | date: 'fullDate'}}
+            </td>
+        </tr>
+    </tbody>
+</table>
